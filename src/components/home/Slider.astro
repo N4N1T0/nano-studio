@@ -1,0 +1,234 @@
+---
+import { HomeHeroImage } from "@/assets";
+import Image from "astro/components/Image.astro";
+---
+
+<section id="slider" class="relative w-screen h-screen overflow-hidden">
+  <div class="slide">
+    <div class="slide-main-img-wrapper">
+      <Image src={HomeHeroImage} alt="Hero Image" width={1920} height={1080} />
+    </div>
+  </div>
+  <a class="card relative" href="#contact">
+    <div id="cursor"></div>
+    <div class="card-bg-img">
+      <Image src={HomeHeroImage} alt="Hero Image" width={500} height={700} />
+    </div>
+    <div class="text-left pt-4 w-full">
+      <div class="text-3xl md:text-4xl card-title overflow-hidden">
+        <p>Arquitectural Design</p>
+      </div>
+      <div
+        class="w-full card-description text-muted-foreground overflow-hidden"
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
+          dicta quae optio sapiente voluptas modi dolorum adipisci.
+        </p>
+      </div>
+    </div>
+  </a>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { CustomEase } from "gsap/all";
+
+  const slides = [
+    {
+      title: "Arquitectural Design",
+      description: "Lorem ipsum dolor sit amet...",
+      href: "#contact",
+      image: {
+        src: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      },
+    },
+    {
+      title: "Interior Innovation",
+      description: "Crafting interiors that blend functionality...",
+      href: "#contact",
+      image: {
+        src: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      },
+    },
+    {
+      title: "Urban Planning",
+      description: "Shaping sustainable and vibrant urban spaces...",
+      href: "#contact",
+      image: {
+        src: "https://images.pexels.com/photos/1534605/pexels-photo-1534605.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      },
+    },
+    {
+      title: "Landscape Architecture",
+      description: "Designing harmonious outdoor environments...",
+      href: "#contact",
+      image: {
+        src: "https://images.pexels.com/photos/269323/pexels-photo-269323.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      },
+    },
+    {
+      title: "Sustainable Solutions",
+      description: "Innovative eco-friendly architectural practices...",
+      href: "#contact",
+      image: {
+        src: "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      },
+    },
+    // ... resto de slides
+  ];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(CustomEase);
+
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+    let isAnimating = false;
+    let lastScrollTime = 0;
+    const customEase = CustomEase.create("", ".87,0,.13,1");
+
+    const createSlide = (slideNumber: number, direction: "up" | "down") => {
+      const slide = document.createElement("div");
+      slide.classList.add("slide");
+
+      const slideBgImg = document.createElement("div");
+      slideBgImg.classList.add("slide-main-img-wrapper");
+      const imgBg = document.createElement("img");
+      imgBg.src = slides[slideNumber - 1].image.src;
+      imgBg.alt = slides[slideNumber - 1].title;
+      imgBg.width = 500;
+      imgBg.height = 700;
+      slideBgImg.appendChild(imgBg);
+
+      slide.appendChild(slideBgImg);
+
+      slide.style.clipPath =
+        direction === "down"
+          ? "polygon(0 100%,100% 100%,100% 100%,0 100%)"
+          : "polygon(0 0%,100% 0%,100% 0%,0 0%)";
+
+      return slide;
+    };
+
+    const createCardImage = (slideNumber: number, direction: "up" | "down") => {
+      const imgCard = document.createElement("img");
+      imgCard.src = slides[slideNumber - 1].image.src;
+      imgCard.alt = slides[slideNumber - 1].title;
+      imgCard.width = 500;
+      imgCard.height = 700;
+      imgCard.style.clipPath =
+        direction === "down"
+          ? "polygon(0 0%,100% 0%,100% 0%,0 0%)"
+          : "polygon(0 100%,100% 100%,100% 100%,0 100%)";
+
+      return imgCard;
+    };
+
+    const animateSlide = (direction: "up" | "down") => {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const slider = document.querySelector("#slider") as HTMLElement;
+      const currentSlider = slider.querySelector(".slide") as HTMLElement;
+      const currentCardBg = slider.querySelector(
+        ".card .card-bg-img"
+      ) as HTMLElement;
+      const currentCardBgImg = slider.querySelector(
+        ".card .card-bg-img img"
+      ) as HTMLElement;
+      const currentCardTitle = slider.querySelector(
+        ".card .card-title"
+      ) as HTMLElement;
+      const currentCartDesc = slider.querySelector(
+        ".card .card-description"
+      ) as HTMLElement;
+      const counter = document.querySelector(
+        "#slider-counter p"
+      ) as HTMLElement;
+
+      currentSlide =
+        direction === "down"
+          ? currentSlide === totalSlides
+            ? 1
+            : currentSlide + 1
+          : currentSlide === 1
+            ? totalSlides
+            : currentSlide - 1;
+
+      const newSlide = createSlide(currentSlide, direction);
+      const newCardBgImg = createCardImage(currentSlide, direction);
+
+      slider.appendChild(newSlide);
+      currentCardBg.appendChild(newCardBgImg);
+
+      const tl = gsap.timeline({
+        defaults: { ease: customEase, duration: 1.25 },
+        onComplete: () => {
+          currentSlider.remove();
+          currentCardBgImg.remove();
+          isAnimating = false;
+          lastScrollTime = Date.now();
+        },
+      });
+
+      tl.to(newSlide, {
+        clipPath:
+          direction === "down"
+            ? "polygon(0 100%,100% 100%,100% 0%,0 0%)"
+            : "polygon(0 0%,100% 0%,100% 100%,0 100%)",
+      })
+        .to(currentSlider.querySelector("img"), { scale: 1.5 }, 0)
+        .to(
+          newCardBgImg,
+          {
+            clipPath:
+              direction === "down"
+                ? "polygon(0 0%,100% 0%,100% 100%,0 100%)"
+                : "polygon(0 100%,100% 100%,100% 0%,0 0%)",
+          },
+          0
+        )
+        .to(currentCardBgImg, { scale: 1.5 }, 0)
+        .to(
+          [
+            currentCardTitle.querySelector("p"),
+            currentCartDesc.querySelector("p"),
+          ],
+          {
+            y: direction === "down" ? "110%" : "-110%",
+            stagger: 0.2,
+            onComplete: () => {
+              const titleEl = currentCardTitle.querySelector("p");
+              const descEl = currentCartDesc.querySelector("p");
+              counter.innerText = currentSlide.toString();
+              if (titleEl) titleEl.innerText = slides[currentSlide - 1].title;
+              if (descEl)
+                descEl.innerText = slides[currentSlide - 1].description;
+            },
+          },
+          -0.5
+        )
+        .to(
+          [
+            currentCardTitle.querySelector("p"),
+            currentCartDesc.querySelector("p"),
+          ],
+          {
+            y: direction === "down" ? "0%" : "0%",
+            stagger: 0.2,
+          },
+          0.5
+        );
+    };
+
+    const handleScroll = (direction: "up" | "down") => {
+      const now = Date.now();
+      if (now - lastScrollTime < 1000) return;
+      animateSlide(direction);
+    };
+
+    document.addEventListener("wheel", (e) => {
+      handleScroll(e.deltaY > 0 ? "down" : "up");
+    });
+  });
+</script>
