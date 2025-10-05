@@ -1,0 +1,54 @@
+---
+import Contact from "@/components/home/Contact.astro";
+import Footer from "@/components/home/layout/Footer.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Astro",
+  description = "A fast, modern site built with Astro",
+  image = "/og-image.jpg",
+  canonical = Astro.url.href,
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+    <link rel="canonical" href={canonical} />
+  </head>
+
+  <body class="font-sans m-0 p-0 relative overflow-y-hidden">
+    <Contact />
+    <slot />
+  </body>
+</html>
