@@ -1,0 +1,274 @@
+---
+import Slider from "@/components/home/Slider.astro";
+import Footer from "@/components/home/layout/Footer.astro";
+---
+
+<section
+  class="font-sans bg-primary text-primary-foreground"
+  id="hero-container"
+>
+  <!-- PRELOADER -->
+  <div id="preloader" class="fixed w-screen h-[100svh] bg-primary z-20">
+    <div
+      class="intro-title absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center"
+    >
+      <h1 class="uppercase text-4xl md:text-8xl font-semibold">nano studio</h1>
+    </div>
+    <div
+      class="outro-title absolute top-1/2 left-[calc(50%+4rem)] md:left-[calc(50%+10rem)] -translate-x-1/2 -translate-y-1/2 w-full text-center"
+    >
+      <h1 class="uppercase text-4xl md:text-8xl font-semibold">-9</h1>
+    </div>
+  </div>
+
+  <!-- SPLIT OVERLAY -->
+  <div id="split-overlay" class="fixed w-screen h-screen bg-primary z-10">
+    <div
+      class="intro-title absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center"
+    >
+      <h1 class="uppercase text-4xl md:text-8xl font-semibold">nano studio</h1>
+    </div>
+    <div
+      class="outro-title absolute top-1/2 left-[calc(50%+4rem)] md:left-[calc(50%+10rem)] -translate-x-1/2 -translate-y-1/2 w-full text-center"
+    >
+      <h1 class="uppercase text-4xl md:text-8xl font-semibold">-9</h1>
+    </div>
+  </div>
+
+  <!-- TAGS -->
+  <div
+    id="tags"
+    class="fixed w-screen h-[100svh] z-20 [&_div]:absolute [&_div]:w-max [&_div]:text-muted-foreground [&_div]:overflow-hidden"
+  >
+    <div class="tag top-[15%] left-[15%]">
+      <p class="uppercase text-sm font-medium">
+        costumer retention optimization specialist
+      </p>
+    </div>
+    <div class="tag bottom-[10%] left-[45%]">
+      <p class="uppercase text-sm font-medium">
+        10<span>-9</span> (Nanometro)
+      </p>
+    </div>
+    <div class="tag top-[25%] right-[25%]">
+      <p class="uppercase text-sm font-medium">Front-end Developer</p>
+    </div>
+    <div class="tag bottom-[15%] left-[10%]">
+      <p class="uppercase text-sm font-medium">visual engineering</p>
+    </div>
+    <div class="tag bottom-[30%] right-[15%]">
+      <p class="uppercase text-sm font-medium">
+        seo and performance optimization
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main
+    id="container"
+    class="relative size-full min-h-screen z-10 [clip-path:polygon(0_48%,0_48%,0_52%,0_52%)]"
+  >
+    <Slider />
+    <Footer />
+  </main>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { CustomEase } from "gsap/CustomEase";
+  import { SplitText } from "gsap/SplitText";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(CustomEase, SplitText);
+
+    // HELPER FUNCTION
+    const splitTextElements = (
+      selector: string,
+      type: string = "words,chars",
+      addFirstChar: boolean = false
+    ) => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach((element) => {
+        const splitText = new SplitText(element, {
+          type,
+          wordsClass: "word",
+          charsClass: "char",
+        });
+
+        if (type.includes("chars")) {
+          splitText.chars.forEach((char, index) => {
+            const originalText = char.textContent;
+            char.innerHTML = `<span>${originalText}</span>`;
+
+            if (addFirstChar && index === 0) {
+              char.classList.add("first-char");
+            }
+          });
+        }
+      });
+    };
+    const isMobile = window.innerWidth < 1000;
+
+    // UTILS
+    CustomEase.create("hop", ".8, 0, .3, 1");
+    const tags = gsap.utils.toArray(".tag") as HTMLElement[];
+
+    // SPLIT TEXT
+    splitTextElements(".intro-title h1", "words, chars", true);
+    splitTextElements(".outro-title h1");
+    splitTextElements(".tag p", "words");
+
+    // SPLIT OVERLAY
+    gsap.set(
+      [
+        "#split-overlay .intro-title .first-char span",
+        "#split-overlay .outro-title .char span",
+      ],
+      {
+        y: "0%",
+      }
+    );
+
+    gsap.set("#split-overlay .intro-title .first-char", {
+      fontSize: isMobile ? "6rem" : "14rem",
+      x: isMobile ? "9rem" : "14rem",
+    });
+
+    gsap.set("#split-overlay .outro-title .char", {
+      x: isMobile ? "-3rem" : "-5rem",
+      y: isMobile ? "-3rem" : "-5rem",
+      scale: 0.75,
+      fontWeight: "500",
+    });
+
+    // TIMELINE
+    const tl = gsap.timeline({
+      defaults: {
+        duration: 1,
+        ease: "hop",
+      },
+    });
+
+    // ANIMATIONS
+    tags.forEach((tag, index) => {
+      tl.to(
+        tag.querySelectorAll("p .word"),
+        {
+          y: "0%",
+          duration: 0.75,
+        },
+        0.5 + index * 0.1
+      );
+    });
+
+    tl.to(
+      "#preloader .intro-title .char span",
+      {
+        y: "0%",
+        duration: 0.75,
+        stagger: 0.05,
+      },
+      0.5
+    )
+      .to(
+        "#preloader .intro-title .char:not(.first-char) span",
+        {
+          y: "100%",
+          duration: 0.5,
+          stagger: 0.05,
+        },
+        2
+      )
+      .to(
+        "#preloader .outro-title .char span",
+        {
+          y: "0%",
+          duration: 0.75,
+          stagger: 0.075,
+        },
+        2.25
+      )
+      .to(
+        "#preloader .intro-title .first-char",
+        {
+          x: isMobile ? "9rem" : "14rem",
+          duration: 1,
+        },
+        3
+      )
+      .to(
+        "#preloader .outro-title .char",
+        {
+          x: isMobile ? "-3rem" : "-5rem",
+          duration: 1,
+        },
+        3
+      )
+      .to(
+        "#preloader .intro-title .first-char",
+        {
+          fontSize: isMobile ? "6rem" : "14rem",
+          duration: 0.5,
+        },
+        3.5
+      )
+      .to(
+        "#preloader .outro-title .char",
+        {
+          y: isMobile ? "-3rem" : "-5rem",
+          scale: 0.75,
+          duration: 0.5,
+          onComplete: () => {
+            gsap.set("#preloader", {
+              clipPath: "polygon(0 0, 100% 0, 100% 50%, 0% 50%)",
+            }),
+              gsap.set("#split-overlay", {
+                clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)",
+              });
+          },
+        },
+        3.5
+      )
+      .to(
+        "#container",
+        {
+          clipPath: "polygon(0 48%, 100% 48%, 100% 52%, 0% 52%)",
+          duration: 0.5,
+        },
+        4
+      );
+
+    // TAGS DESPAIRING
+    tags.forEach((tag, index) => {
+      tl.to(
+        tag.querySelectorAll("p .word"),
+        {
+          y: "100%",
+          duration: 0.75,
+        },
+        4 + index * 0.1
+      );
+    });
+
+    tl.to(
+      ["#preloader, #split-overlay"],
+      {
+        y: (i) => (i === 0 ? "-50%" : "50%"),
+        duration: 1,
+      },
+      4.5
+    )
+      .to(
+        "#container",
+        {
+          clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 1,
+        },
+        4.5
+      )
+      .to(["#preloader, #split-overlay, #tags"], {
+        duration: 0.1,
+        display: "none",
+      });
+  });
+</script>
