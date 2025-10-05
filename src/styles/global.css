@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* FONT */
+  --font-sans: "DM Sans", sans-serif;
+
+  /* COLOR */
+  --color-primary: #0a0a0a;
+  --color-primary-foreground: #ffffff;
+  --color-muted-foreground: #5a5a5a;
+}
+
+/* HERO */
+.card .char span {
+  @apply relative inline-block translate-y-full will-change-transform;
+}
+
+.intro-title .char,
+.outro-title .char,
+.card .char {
+  @apply relative inline-block overflow-hidden;
+}
+
+.intro-title .char,
+.outro-title .char {
+  @apply mt-3;
+}
+
+.intro-title .char span,
+.outro-title .char span,
+.tag .word {
+  transform: translateY(-100%);
+  @apply relative inline-block will-change-transform;
+}
+
+.intro-title .first-char {
+  @apply origin-top-left;
+}
+
+@media (max-width: 1000px) {
+  .intro-title .char,
+  .outro-title .char {
+    @apply mt-2;
+  }
+}
+
+/* MENU */
+.line {
+  position: relative;
+  will-change: transform;
+}
+
+/* SLIDER */
+.slide {
+  @apply absolute inset-0 size-full;
+}
+
+.slide-main-img-wrapper img {
+  @apply size-full object-cover absolute z-0 will-change-transform;
+}
+
+.card {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] md:w-[30%] h-[70%] flex justify-center items-center bg-primary-foreground p-3 flex-col text-primary z-50;
+}
+
+.card:hover {
+  cursor: "progress";
+}
+
+.card .card-bg-img {
+  @apply overflow-hidden flex-1 relative size-full;
+}
+
+.card .card-bg-img img {
+  @apply size-full object-cover will-change-transform absolute inset-0;
+}
