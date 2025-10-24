@@ -1,12 +1,12 @@
 ---
-import { HomeHeroImage } from "@/assets";
+import { slides } from "@/assets";
 import { Image } from "astro:assets";
 import Form from "@/components/home/Form.astro";
 ---
 
 <!-- MENU FORM -->
 <nav
-  class="fixed w-screen h-[100svh] overflow-hidden z-20 inset-0 text-primary-foreground"
+  class="fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground"
 >
   <div
     class="fixed top-0 left-0 w-screen p-8 flex justify-between items-center z-20"
@@ -37,8 +37,8 @@ import Form from "@/components/home/Form.astro";
         id="menu-media-wrapper"
         class="flex-2 will-change-[opacity] hidden md:block opacity-0"
       >
-        <Image
-          src={HomeHeroImage}
+        <img
+          src={slides[0].image.src}
           alt="Hero Image"
           width={1920}
           height={1080}
@@ -74,6 +74,7 @@ import Form from "@/components/home/Form.astro";
   import gsap from "gsap";
   import { CustomEase } from "gsap/CustomEase";
   import { SplitText } from "gsap/SplitText";
+  import { slides } from "@/assets";
 
   // ELEMENTS
   const heroContainer = document.querySelector("#hero-container");
@@ -84,6 +85,15 @@ import Form from "@/components/home/Form.astro";
   const menuOverlayContent = document.querySelector("#menu-overlay-content");
   const textContainers = document.querySelectorAll(".menu-col");
   const formItems = document.querySelectorAll(".form-item");
+
+  // COUNTER
+  document.addEventListener("slidechange", (e) => {
+    const ev = e as CustomEvent<{ index: number }>;
+    menuMediaWrapper
+      ?.querySelector("img")
+      ?.setAttribute("src", slides[ev.detail.index - 1].image.src);
+    console.log("Current slide:", ev.detail.index);
+  });
 
   document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(CustomEase, SplitText);
@@ -117,8 +127,6 @@ import Form from "@/components/home/Form.astro";
 
     // EVENT
     menuToggle?.addEventListener("click", () => {
-      console.log(contactMenuLabel);
-
       if (isAnimating) return;
 
       if (!isMenuOpen) {
