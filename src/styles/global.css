@@ -60,6 +60,10 @@
   @apply size-full object-cover absolute z-0 will-change-transform;
 }
 
+.slide-main-img-wrapper .overlay {
+  @apply size-full object-cover absolute blur-2xl brightness-75 bg-primary z-20 opacity-20;
+}
+
 .card {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] md:w-[30%] h-[70%] flex justify-center items-center bg-primary-foreground p-3 flex-col text-primary z-50;
 }
