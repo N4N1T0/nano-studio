@@ -1,7 +1,7 @@
 {
   "name": "nano_studio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,14 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/preact": "^4.1.1",
-    "@tailwindcss/vite": "^4.1.13",
-    "astro": "^5.14.1",
+    "@tailwindcss/vite": "^4.1.16",
+    "astro": "^5.15.1",
     "gsap": "^3.13.0",
     "preact": "^10.27.2",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
     "@types/gsap": "^3.0.0"
-  }
+  },
+  "packageManager": "pnpm@10.19.0"
 }
