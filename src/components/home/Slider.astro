@@ -1,22 +1,36 @@
 ---
-import { HomeHeroImage } from "@/assets";
-import Image from "astro/components/Image.astro";
+import { slides } from "@/assets";
 ---
 
 <section id="slider" class="relative w-screen h-screen overflow-hidden">
   <div class="slide">
     <div class="slide-main-img-wrapper">
-      <Image src={HomeHeroImage} alt="Hero Image" width={1920} height={1080} />
+      <img
+        src={slides[0].image.src}
+        alt={slides[0].title}
+        width={1920}
+        height={1080}
+      />
     </div>
   </div>
-  <a class="card relative" href="#contact">
+  <a
+    class="card relative"
+    href="#contact"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     <div id="cursor"></div>
     <div class="card-bg-img">
-      <Image src={HomeHeroImage} alt="Hero Image" width={500} height={700} />
+      <img
+        src={slides[0].image.src}
+        alt={slides[0].title}
+        width={500}
+        height={700}
+      />
     </div>
     <div class="text-left pt-4 w-full">
       <div class="text-3xl md:text-4xl card-title overflow-hidden">
-        <p>Arquitectural Design</p>
+        <p>{slides[0].title}</p>
       </div>
       <div
         class="w-full card-description text-muted-foreground overflow-hidden"
@@ -33,50 +47,7 @@ import Image from "astro/components/Image.astro";
 <script>
   import gsap from "gsap";
   import { CustomEase } from "gsap/all";
-
-  const slides = [
-    {
-      title: "Arquitectural Design",
-      description: "Lorem ipsum dolor sit amet...",
-      href: "#contact",
-      image: {
-        src: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      },
-    },
-    {
-      title: "Interior Innovation",
-      description: "Crafting interiors that blend functionality...",
-      href: "#contact",
-      image: {
-        src: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      },
-    },
-    {
-      title: "Urban Planning",
-      description: "Shaping sustainable and vibrant urban spaces...",
-      href: "#contact",
-      image: {
-        src: "https://images.pexels.com/photos/1534605/pexels-photo-1534605.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      },
-    },
-    {
-      title: "Landscape Architecture",
-      description: "Designing harmonious outdoor environments...",
-      href: "#contact",
-      image: {
-        src: "https://images.pexels.com/photos/269323/pexels-photo-269323.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      },
-    },
-    {
-      title: "Sustainable Solutions",
-      description: "Innovative eco-friendly architectural practices...",
-      href: "#contact",
-      image: {
-        src: "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      },
-    },
-    // ... resto de slides
-  ];
+  import { slides } from "@/assets/index";
 
   document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(CustomEase);
@@ -93,6 +64,7 @@ import Image from "astro/components/Image.astro";
 
       const slideBgImg = document.createElement("div");
       slideBgImg.classList.add("slide-main-img-wrapper");
+
       const imgBg = document.createElement("img");
       imgBg.src = slides[slideNumber - 1].image.src;
       imgBg.alt = slides[slideNumber - 1].title;
@@ -113,7 +85,7 @@ import Image from "astro/components/Image.astro";
     const createCardImage = (slideNumber: number, direction: "up" | "down") => {
       const imgCard = document.createElement("img");
       imgCard.src = slides[slideNumber - 1].image.src;
-      imgCard.alt = slides[slideNumber - 1].title;
+      imgCard.alt = slides[slideNumber - 1].image.alt;
       imgCard.width = 500;
       imgCard.height = 700;
       imgCard.style.clipPath =
@@ -133,6 +105,9 @@ import Image from "astro/components/Image.astro";
       const currentCardBg = slider.querySelector(
         ".card .card-bg-img"
       ) as HTMLElement;
+      const currentCardAnchor = slider.querySelector(
+        ".card"
+      ) as HTMLAnchorElement;
       const currentCardBgImg = slider.querySelector(
         ".card .card-bg-img img"
       ) as HTMLElement;
@@ -166,6 +141,7 @@ import Image from "astro/components/Image.astro";
         onComplete: () => {
           currentSlider.remove();
           currentCardBgImg.remove();
+          currentCardAnchor.href = slides[currentSlide - 1].href;
           isAnimating = false;
           lastScrollTime = Date.now();
         },
@@ -201,6 +177,9 @@ import Image from "astro/components/Image.astro";
               const titleEl = currentCardTitle.querySelector("p");
               const descEl = currentCartDesc.querySelector("p");
               counter.innerText = currentSlide.toString();
+              document.dispatchEvent(
+                new CustomEvent("slidechange", { detail: { index: currentSlide } })
+              );
               if (titleEl) titleEl.innerText = slides[currentSlide - 1].title;
               if (descEl)
                 descEl.innerText = slides[currentSlide - 1].description;
