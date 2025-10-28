@@ -1,6 +1,5 @@
 ---
-import Slider from "@/components/home/Slider.astro";
-import Footer from "@/components/home/layout/Footer.astro";
+import Slider from "@/components/Slider.astro";
 ---
 
 <section
@@ -8,7 +7,7 @@ import Footer from "@/components/home/layout/Footer.astro";
   id="hero-container"
 >
   <!-- PRELOADER -->
-  <div id="preloader" class="fixed w-screen h-[100svh] bg-primary z-20">
+  <div id="preloader" class="fixed w-screen h-svh bg-primary z-20">
     <div
       class="intro-title absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center"
     >
@@ -38,7 +37,7 @@ import Footer from "@/components/home/layout/Footer.astro";
   <!-- TAGS -->
   <div
     id="tags"
-    class="fixed w-screen h-[100svh] z-20 [&_div]:absolute [&_div]:w-max [&_div]:text-muted-foreground [&_div]:overflow-hidden"
+    class="fixed w-screen h-svh z-20 [&_div]:absolute [&_div]:w-max [&_div]:text-muted-foreground [&_div]:overflow-hidden"
   >
     <div class="tag top-[15%] left-[15%]">
       <p class="uppercase text-sm font-medium">
@@ -69,7 +68,6 @@ import Footer from "@/components/home/layout/Footer.astro";
     class="relative size-full min-h-screen z-10 [clip-path:polygon(0_48%,0_48%,0_52%,0_52%)]"
   >
     <Slider />
-    <Footer />
   </main>
 </section>
 
