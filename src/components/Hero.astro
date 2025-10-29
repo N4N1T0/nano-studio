@@ -6,6 +6,8 @@ import Slider from "@/components/Slider.astro";
   class="font-sans bg-primary text-primary-foreground"
   id="hero-container"
 >
+  <!-- INITIAL VEIL: hides first paint to prevent flash -->
+  <div id="initial-veil" class="fixed inset-0 z-50 bg-primary"></div>
   <!-- PRELOADER -->
   <div id="preloader" class="fixed w-screen h-svh bg-primary z-20">
     <div
@@ -115,6 +117,9 @@ import Slider from "@/components/Slider.astro";
     CustomEase.create("hop", ".8, 0, .3, 1");
     const tags = gsap.utils.toArray(".tag") as HTMLElement[];
 
+    // Ensure the veil is visible before starting animations
+    gsap.set("#initial-veil", { autoAlpha: 1 });
+
     // SPLIT TEXT
     splitTextElements(".intro-title h1", "words, chars", true);
     splitTextElements(".outro-title h1");
@@ -172,14 +177,25 @@ import Slider from "@/components/Slider.astro";
     });
 
     tl.to(
-      "#preloader .intro-title .char span",
+      "#initial-veil",
       {
-        y: "0%",
-        duration: 0.75,
-        stagger: 0.05,
+        autoAlpha: 0,
+        duration: 0.2,
+        onComplete: () => {
+          gsap.set("#initial-veil", { display: "none" });
+        },
       },
-      0.5
+      0
     )
+      .to(
+        "#preloader .intro-title .char span",
+        {
+          y: "0%",
+          duration: 0.75,
+          stagger: 0.05,
+        },
+        0.5
+      )
       .to(
         "#preloader .intro-title .char:not(.first-char) span",
         {
