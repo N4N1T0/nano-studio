@@ -4,11 +4,12 @@ import Form from "@/components/Form.astro";
 ---
 
 <!-- MENU FORM -->
-<nav
+<header
   class="fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground"
 >
   <div
-    class="fixed top-0 left-0 w-screen p-8 flex justify-between items-center z-20"
+    class="fixed top-0 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0"
+    id="header-nav"
   >
     <p id="logo" class="font-semibold text-lg">NANO<sup>-9</sup></p>
     <button
@@ -69,7 +70,7 @@ import Form from "@/components/Form.astro";
       </div>
     </div>
   </div>
-</nav>
+</header>
 
 <script>
   import gsap from "gsap";
@@ -86,6 +87,7 @@ import Form from "@/components/Form.astro";
   const menuOverlayContent = document.querySelector("#menu-overlay-content");
   const textContainers = document.querySelectorAll(".menu-col");
   const formItems = document.querySelectorAll(".form-item");
+  const footerNav = document.querySelector("#footer-nav");
 
   // COUNTER
   document.addEventListener("slidechange", (e) => {
@@ -140,18 +142,27 @@ import Form from "@/components/Form.astro";
           },
         });
 
-        tl.to(contactMenuLabel, {
-          y: "-110%",
-          duration: 0.25,
-          onComplete: () => {
-            if (contactMenuLabel) contactMenuLabel.innerHTML = "Cerrar";
-            gsap.to(contactMenuLabel, {
-              y: "0%",
-              duration: 0.5,
-              ease: "hop",
-            });
-          },
+        tl.to(footerNav, {
+          opacity: 0,
+          y: 50,
+          duration: 0.5,
         })
+          .to(
+            contactMenuLabel,
+            {
+              y: "-110%",
+              duration: 0.25,
+              onComplete: () => {
+                if (contactMenuLabel) contactMenuLabel.innerHTML = "Cerrar";
+                gsap.to(contactMenuLabel, {
+                  y: "0%",
+                  duration: 0.5,
+                  ease: "hop",
+                });
+              },
+            },
+            "<"
+          )
           .to(
             heroContainer,
             {
@@ -270,7 +281,12 @@ import Form from "@/components/Form.astro";
               duration: 0.75,
             },
             "<"
-          );
+          )
+          .to(footerNav, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+          });
 
         tl.call(() => {
           textSplits.forEach((containerSplits) => {

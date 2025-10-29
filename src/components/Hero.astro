@@ -79,6 +79,10 @@ import Slider from "@/components/Slider.astro";
   document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(CustomEase, SplitText);
 
+    // ELEMENTS
+    const headerNav = document.getElementById("header-nav");
+    const footerNav = document.getElementById("footer-nav");
+
     // HELPER FUNCTION
     const splitTextElements = (
       selector: string,
@@ -137,6 +141,14 @@ import Slider from "@/components/Slider.astro";
       y: isMobile ? "-3rem" : "-5rem",
       scale: 0.75,
       fontWeight: "500",
+    });
+
+    gsap.set([footerNav], {
+      y: 50,
+    });
+
+    gsap.set([headerNav], {
+      y: -50,
     });
 
     // TIMELINE
@@ -234,6 +246,24 @@ import Slider from "@/components/Slider.astro";
           duration: 0.5,
         },
         4
+      )
+      .to(
+        headerNav,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+        },
+        5.5
+      )
+      .to(
+        footerNav,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+        },
+        5.5
       );
 
     // TAGS DESPAIRING
