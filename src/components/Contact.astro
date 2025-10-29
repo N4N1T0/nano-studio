@@ -60,11 +60,17 @@ import Form from "@/components/Form.astro";
         >
           <!-- CONTACT INFO -->
           <div class="menu-col flex flex-col gap-2 flex-3">
-            <p>© 2023 NANO-9. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} NANO-9. All rights reserved.</p>
           </div>
           <div class="menu-col flex flex-col gap-2 flex-2">
-            <p>email@nano-9.com</p>
-            <p>+62 812 3456 7890</p>
+            <p>
+              <a href="mailto:ceo@nanostudio.pro" class="underline"
+                >ceo@nanostudio.pro</a
+              >
+            </p>
+            <p>
+              <a href="tel:+62647317214" class="underline">+62 647 31 72 14</a>
+            </p>
           </div>
         </div>
       </div>
