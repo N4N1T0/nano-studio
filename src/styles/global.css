@@ -6,9 +6,9 @@
   --font-sans: "DM Sans", sans-serif;
 
   /* COLOR */
-  --color-primary: #0a0a0a;
-  --color-primary-foreground: #ffffff;
-  --color-muted-foreground: #5a5a5a;
+  --color-primary: oklch(27.81% 0.0296 256.85);
+  --color-primary-foreground: oklch(79.75% 0.0951 268.35);
+  --color-muted-foreground: oklch(67.06% 0.0345 268.35);
 }
 
 /* HERO */
@@ -66,10 +66,6 @@
 
 .card {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] md:w-[30%] h-[70%] flex justify-center items-center bg-primary-foreground p-3 flex-col text-primary z-50;
-}
-
-.card:hover {
-  cursor: "progress";
 }
 
 .card .card-bg-img {
