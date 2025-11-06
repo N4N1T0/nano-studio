@@ -6,19 +6,33 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky",
+    "check": "astro check"
+  },
+  "lint-staged": {
+    "*.astro": "prettier --write"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.5",
     "@astrojs/vercel": "^9.0.0",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.15.1",
     "gsap": "^3.13.0",
+    "husky": "^9.1.7",
     "preact": "^10.27.2",
     "resend": "^6.3.0",
-    "tailwindcss": "^4.1.16"
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@types/gsap": "^3.0.0"
+    "@types/gsap": "^3.0.0",
+    "eslint-plugin-astro": "^1.5.0",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-tailwindcss": "^0.7.1"
   },
   "packageManager": "pnpm@10.19.0"
 }
