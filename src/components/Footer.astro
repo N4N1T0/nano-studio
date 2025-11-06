@@ -1,28 +1,28 @@
 <footer
-  class="fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground"
+  class='fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground'
 >
   <div
-    class="fixed bottom-0 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0"
-    id="footer-nav"
+    class='fixed bottom-0 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0'
+    id='footer-nav'
   >
     <!-- ABOUT BUTTON -->
     <button
-      id="footer-about-toggle"
-      class="group relative w-full md:w-auto px-6 py-2 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground z-10"
+      id='footer-about-toggle'
+      class='group relative w-full md:w-auto px-6 py-2 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground z-10'
     >
-      <span class="inline-block relative z-10" id="footer-about-menu-label"
+      <span class='inline-block relative z-10' id='footer-about-menu-label'
         >About</span
       >
       <div
-        class="absolute inset-0 bg-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+        class='absolute inset-0 bg-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out'
       >
       </div>
     </button>
 
     <!-- COUNTER -->
-    <div class="flex items-center gap-4">
-      <div class="flex items-center gap-2 opacity-75">
-        <div id="slider-counter">
+    <div class='flex items-center gap-4'>
+      <div class='flex items-center gap-2 opacity-75'>
+        <div id='slider-counter'>
           <p>1</p>
         </div>
         <p>/</p>
@@ -35,22 +35,26 @@
 
   <!-- ABOUT OVERLAY -->
   <div
-    id="footer-overlay"
-    class="fixed inset-x-0 bottom-0 h-[40svh] bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0_100%,100%_100%,100%_100%,0_100%)]"
+    id='footer-overlay'
+    class='fixed inset-x-0 bottom-0 h-[40svh] bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0_100%,100%_100%,100%_100%,0_100%)]'
   >
     <div
-      id="footer-overlay-content"
-      class="absolute inset-x-0 bottom-0 h-full bg-primary overflow-hidden flex items-end will-change-transform"
+      id='footer-overlay-content'
+      class='absolute inset-x-0 bottom-0 h-full bg-primary overflow-hidden flex items-end will-change-transform'
     >
       <div
-        class="size-full md:w-3/4 mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-primary-foreground"
+        class='size-full md:w-3/4 mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-primary-foreground'
       >
-        <div class="footer-col flex flex-col gap-2 col-span-1">
-          <p class="text-lg font-semibold">PORTFOLIO</p>
-          <p class="opacity-80">Adrian "Alvarez" Alonso</p>
+        <div class='footer-col flex flex-col gap-2 col-span-1'>
+          <p class='text-lg font-semibold'>PORTFOLIO</p>
+          <p class='text-muted-foreground underline'>
+            <a href='https://www.adrian-alvarez.dev/en/' target='_blank'
+              >Adrian "Alvarez" Alonso</a
+            >
+          </p>
         </div>
-        <div class="footer-col flex flex-col gap-2 col-span-2">
-          <p class="font-medium">
+        <div class='footer-col flex flex-col gap-2 col-span-2'>
+          <p class='font-medium'>
             I design and build digital experiences where elegance meets
             performance. As a Front-End Developer, I translate the essence of
             luxury brands into fluid, high-converting interfaces — blending
@@ -59,7 +63,7 @@
             navigate.
           </p>
 
-          <p class="font-medium">
+          <p class='font-medium'>
             Each project reflects a balance between design precision and
             technical mastery — built with modern frameworks, optimized for
             speed, and tailored to evoke the sophistication your brand deserves.
@@ -72,52 +76,52 @@
 </footer>
 
 <script>
-  import gsap from "gsap";
-  import { CustomEase } from "gsap/CustomEase";
-  import { SplitText } from "gsap/SplitText";
+  import gsap from 'gsap'
+  import { CustomEase } from 'gsap/CustomEase'
+  import { SplitText } from 'gsap/SplitText'
 
   // ELEMENTS
-  const aboutToggle = document.querySelector("#footer-about-toggle");
-  const heroContainer = document.querySelector("#hero-container");
+  const aboutToggle = document.querySelector('#footer-about-toggle')
+  const heroContainer = document.querySelector('#hero-container')
   const footerAboutMenuLabel = document.querySelector(
-    "#footer-about-menu-label"
-  );
-  const overlay = document.querySelector("#footer-overlay");
-  const overlayContent = document.querySelector("#footer-overlay-content");
-  const textContainers = document.querySelectorAll(".footer-col");
-  const headerNav = document.querySelector("#header-nav");
+    '#footer-about-menu-label'
+  )
+  const overlay = document.querySelector('#footer-overlay')
+  const overlayContent = document.querySelector('#footer-overlay-content')
+  const textContainers = document.querySelectorAll('.footer-col')
+  const headerNav = document.querySelector('#header-nav')
 
-  document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(CustomEase, SplitText);
-    CustomEase.create("hop", ".8, 0, .3, 1");
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(CustomEase, SplitText)
+    CustomEase.create('hop', '.8, 0, .3, 1')
 
     // CONST
-    let isOpen = false;
-    let isAnimating = false;
+    let isOpen = false
+    let isAnimating = false
 
     // PREPARE SPLIT
-    const textSplits = [] as SplitText[][];
+    const textSplits = [] as SplitText[][]
     textContainers.forEach((container) => {
-      const elements = container.querySelectorAll("p, .menu-link");
-      const splits = [] as SplitText[];
+      const elements = container.querySelectorAll('p, .menu-link')
+      const splits = [] as SplitText[]
       elements.forEach((el) => {
         const split = SplitText.create(el, {
-          type: "lines",
-          mask: "lines",
-          linesClass: "line",
-        });
-        splits.push(split);
-        gsap.set(split.lines, { y: "110%" });
-      });
-      textSplits.push([...splits]);
-    });
+          type: 'lines',
+          mask: 'lines',
+          linesClass: 'line'
+        })
+        splits.push(split)
+        gsap.set(split.lines, { y: '110%' })
+      })
+      textSplits.push([...splits])
+    })
 
-    aboutToggle?.addEventListener("click", () => {
-      if (isAnimating) return;
-      isAnimating = true;
+    aboutToggle?.addEventListener('click', () => {
+      if (isAnimating) return
+      isAnimating = true
 
       // TIMELINE
-      const tl = gsap.timeline({ defaults: { ease: "hop" } });
+      const tl = gsap.timeline({ defaults: { ease: 'hop' } })
 
       if (!isOpen) {
         // OPEN UP
@@ -125,97 +129,97 @@
           .to(
             footerAboutMenuLabel,
             {
-              y: "-110%",
+              y: '-110%',
               duration: 0.25,
               onComplete: () => {
                 if (footerAboutMenuLabel)
-                  footerAboutMenuLabel.innerHTML = "Cerrar";
+                  footerAboutMenuLabel.innerHTML = 'Cerrar'
                 gsap.to(footerAboutMenuLabel, {
-                  y: "0%",
+                  y: '0%',
                   duration: 0.5,
-                  ease: "hop",
-                });
-              },
+                  ease: 'hop'
+                })
+              }
             },
-            "<"
+            '<'
           )
           .to(
             heroContainer,
             {
-              y: "-40svh",
-              duration: 0.8,
+              y: '-40svh',
+              duration: 0.8
             },
-            "<"
+            '<'
           )
           .to(
             overlay,
             {
-              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%)",
-              duration: 0.8,
+              clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%)',
+              duration: 0.8
             },
-            "<"
+            '<'
           )
-          .to(overlayContent, { yPercent: 0, duration: 0.8 }, "<");
+          .to(overlayContent, { yPercent: 0, duration: 0.8 }, '<')
 
         // REVEAL LINES
         textSplits.forEach((containerSplits) => {
-          const lines = containerSplits.flatMap((s) => s.lines);
-          tl.to(lines, { y: "0%", duration: 1.6, stagger: -0.075 }, -0.1);
-        });
+          const lines = containerSplits.flatMap((s) => s.lines)
+          tl.to(lines, { y: '0%', duration: 1.6, stagger: -0.075 }, -0.1)
+        })
 
         tl.call(() => {
-          isAnimating = false;
-          isOpen = true;
-        });
+          isAnimating = false
+          isOpen = true
+        })
       } else {
         // CLOSE DOWN
         tl.to(textContainers, { opacity: 0, duration: 0.5 })
           .to(
             footerAboutMenuLabel,
             {
-              y: "-110%",
+              y: '-110%',
               duration: 0.25,
               onComplete: () => {
                 if (footerAboutMenuLabel)
-                  footerAboutMenuLabel.innerHTML = "About";
+                  footerAboutMenuLabel.innerHTML = 'About'
                 gsap.to(footerAboutMenuLabel, {
-                  y: "0%",
+                  y: '0%',
                   duration: 0.5,
-                  ease: "hop",
-                });
-              },
+                  ease: 'hop'
+                })
+              }
             },
-            "<"
+            '<'
           )
-          .to(overlayContent, { yPercent: 50, duration: 0.8 }, "<")
+          .to(overlayContent, { yPercent: 50, duration: 0.8 }, '<')
           .to(
             overlay,
             {
-              clipPath: "polygon(0 100%,100% 100%,100% 100%,0 100%)",
-              duration: 0.8,
+              clipPath: 'polygon(0 100%,100% 100%,100% 100%,0 100%)',
+              duration: 0.8
             },
-            "<"
+            '<'
           )
           .to(
             heroContainer,
             {
-              y: "0%",
-              duration: 0.8,
+              y: '0%',
+              duration: 0.8
             },
-            "<"
+            '<'
           )
-          .to(headerNav, { opacity: 1, y: 0, duration: 0.5 }, "<")
+          .to(headerNav, { opacity: 1, y: 0, duration: 0.5 }, '<')
           .call(() => {
             // RESET LINES
             textSplits.forEach((containerSplits) => {
-              const lines = containerSplits.flatMap((s) => s.lines);
-              gsap.set(lines, { y: "110%" });
-              gsap.set(textContainers, { opacity: 1 });
-            });
-            isAnimating = false;
-            isOpen = false;
-          });
+              const lines = containerSplits.flatMap((s) => s.lines)
+              gsap.set(lines, { y: '110%' })
+              gsap.set(textContainers, { opacity: 1 })
+            })
+            isAnimating = false
+            isOpen = false
+          })
       }
-    });
-  });
+    })
+  })
 </script>
