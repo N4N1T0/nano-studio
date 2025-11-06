@@ -1,55 +1,55 @@
-<section class="w-full max-w-2xl mx-auto p-8">
-  <div class="space-y-8 menu-col">
+<section class='w-full max-w-2xl mx-auto p-8'>
+  <div class='space-y-8 menu-col'>
     <!-- HEADER -->
-    <div class="text-center space-y-4">
-      <p class="text-primary-foreground text-xl uppercase">
+    <div class='text-center space-y-4'>
+      <p class='text-primary-foreground text-xl uppercase'>
         let's create something amazing together
       </p>
     </div>
 
     <!-- FORM -->
-    <form id="contact-form" class="space-y-4 menu-col">
+    <form id='contact-form' class='space-y-4 menu-col'>
       <!-- NAME -->
       <input
-        type="text"
-        id="name"
-        name="name"
+        type='text'
+        id='name'
+        name='name'
         required
-        class="w-full px-0 py-4 text-lg bg-transparent border-0 border-b text-primary-foreground border-primary-foreground placeholder-primary-foreground/75 focus:border-primary focus:outline-none transition-colors duration-300 ease-out form-item"
-        placeholder="Your full name"
-        autocomplete="name"
+        class='w-full px-0 py-4 text-lg bg-transparent border-0 border-b text-primary-foreground border-primary-foreground placeholder-primary-foreground/75 focus:border-primary focus:outline-none transition-colors duration-300 ease-out form-item'
+        placeholder='Your full name'
+        autocomplete='name'
       />
 
       <!-- EMAIL -->
       <input
-        type="email"
-        id="email"
-        name="email"
+        type='email'
+        id='email'
+        name='email'
         required
-        class="w-full px-0 py-4 text-lg bg-transparent border-0 border-b text-primary-foreground border-primary-foreground placeholder-primary-foreground/75 focus:border-primary focus:outline-none transition-colors duration-300 ease-out form-item"
-        placeholder="your.email@example.com"
-        autocomplete="email"
+        class='w-full px-0 py-4 text-lg bg-transparent border-0 border-b text-primary-foreground border-primary-foreground placeholder-primary-foreground/75 focus:border-primary focus:outline-none transition-colors duration-300 ease-out form-item'
+        placeholder='your.email@example.com'
+        autocomplete='email'
       />
 
       <!-- MESSAGE -->
       <textarea
-        id="message"
-        name="message"
-        rows="5"
+        id='message'
+        name='message'
+        rows='5'
         required
-        class="w-full px-0 py-4 text-lg bg-transparent border-0 border-b text-primary-foreground border-primary-foreground placeholder-primary-foreground/75 focus:border-primary focus:outline-none transition-colors duration-300 ease-out form-item"
-        placeholder="Tell us about your project..."></textarea>
+        class='w-full px-0 py-4 text-lg bg-transparent border-0 border-b text-primary-foreground border-primary-foreground placeholder-primary-foreground/75 focus:border-primary focus:outline-none transition-colors duration-300 ease-out form-item'
+        placeholder='Tell us about your project...'></textarea>
 
       <!-- BUTTON -->
-      <div class="pt-8 form-item">
+      <div class='pt-8 form-item'>
         <button
-          id="submit-button"
-          type="submit"
-          class="group relative w-full md:w-auto px-12 py-4 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-transparent"
+          id='submit-button'
+          type='submit'
+          class='group relative w-full md:w-auto px-12 py-4 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-transparent'
         >
-          <span class="relative z-10">Send Message</span>
+          <span class='relative z-10'>Send Message</span>
           <div
-            class="absolute inset-0 bg-muted-foreground transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+            class='absolute inset-0 bg-muted-foreground transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out'
           >
           </div>
         </button>
@@ -57,16 +57,16 @@
     </form>
 
     <!-- STATUS -->
-    <div id="form-status" class="hidden text-center" aria-live="polite">
-      <p class="text-primary-foreground"></p>
+    <div id='form-status' class='hidden text-center' aria-live='polite'>
+      <p class='text-primary-foreground'></p>
     </div>
 
     <!-- SUCCESS -->
     <div
-      id="success-message"
-      class="hidden p-6 bg-primary/5 border border-primary/20 text-center"
+      id='success-message'
+      class='hidden p-6 bg-primary-foreground text-center'
     >
-      <p class="text-primary font-medium">
+      <p class='text-primary font-medium'>
         Thank you for your message! We'll get back to you soon.
       </p>
     </div>
@@ -74,61 +74,61 @@
 </section>
 
 <script>
-  import { actions } from "astro:actions";
+  import { actions } from 'astro:actions'
 
   // ELEMENTS
-  const form = document.querySelector("#contact-form") as HTMLFormElement;
+  const form = document.querySelector('#contact-form') as HTMLFormElement
   const status = document.querySelector(
-    "#form-status p"
-  ) as HTMLParagraphElement;
+    '#form-status p'
+  ) as HTMLParagraphElement
   const successMessage = document.querySelector(
-    "#success-message"
-  ) as HTMLDivElement;
+    '#success-message'
+  ) as HTMLDivElement
   const submitButton = document.querySelector(
-    "#submit-button"
-  ) as HTMLButtonElement;
+    '#submit-button'
+  ) as HTMLButtonElement
 
   // EVENTS
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (!form || !submitButton) return;
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    if (!form || !submitButton) return
 
     // RESET
-    status?.parentElement?.classList.add("hidden");
-    status.textContent = "";
-    successMessage?.classList.add("hidden");
+    status?.parentElement?.classList.add('hidden')
+    status.textContent = ''
+    successMessage?.classList.add('hidden')
 
     // DISABLE
-    submitButton.disabled = true;
-    const originalBtnText = submitButton.querySelector("span")?.textContent;
+    submitButton.disabled = true
+    const originalBtnText = submitButton.querySelector('span')?.textContent
     if (originalBtnText)
-      submitButton.querySelector("span")!.textContent = "Sending...";
+      submitButton.querySelector('span')!.textContent = 'Sending...'
 
     // Submit via Astro Actions
-    const formData = new FormData(form);
-    const { error, data } = await actions.contact(formData);
+    const formData = new FormData(form)
+    const { error, data } = await actions.contact(formData)
 
     if (error) {
       status.textContent =
-        error.message ?? "There was an error sending your message.";
-      status?.parentElement?.classList.remove("hidden");
-      submitButton.disabled = false;
+        error.message ?? 'There was an error sending your message.'
+      status?.parentElement?.classList.remove('hidden')
+      submitButton.disabled = false
       if (originalBtnText)
-        submitButton.querySelector("span")!.textContent = originalBtnText;
-      return;
+        submitButton.querySelector('span')!.textContent = originalBtnText
+      return
     }
 
     if (data?.success) {
-      successMessage?.classList.remove("hidden");
-      form.reset();
+      successMessage?.classList.remove('hidden')
+      form.reset()
       setTimeout(() => {
-        successMessage?.classList.add("hidden");
-      }, 4000);
+        successMessage?.classList.add('hidden')
+      }, 6000)
     }
 
     // Re-enable button
-    submitButton.disabled = false;
+    submitButton.disabled = false
     if (originalBtnText)
-      submitButton.querySelector("span")!.textContent = originalBtnText;
-  });
+      submitButton.querySelector('span')!.textContent = originalBtnText
+  })
 </script>
