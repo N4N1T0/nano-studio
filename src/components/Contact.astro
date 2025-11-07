@@ -1,26 +1,26 @@
 ---
-import { slides } from "@/assets";
-import Form from "@/components/Form.astro";
+import { slides } from '@/assets'
+import Form from '@/components/Form.astro'
 ---
 
 <!-- MENU FORM -->
 <header
-  class="fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground"
+  class='fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground'
 >
   <div
-    class="fixed top-0 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0"
-    id="header-nav"
+    class='fixed -top-4 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0'
+    id='header-nav'
   >
-    <p id="logo" class="font-semibold text-lg">NANO<sup>-9</sup></p>
+    <p id='logo' class='font-semibold text-lg'>NANO<sup>-9</sup></p>
     <button
-      class="group relative w-full md:w-auto px-6 py-2 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground"
-      id="menu-toggle"
-      ><span id="contact-menu-label" class="inline-block relative z-10"
+      class='group relative w-auto px-3 md:px-6 py-1 md:py-2 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground'
+      id='menu-toggle'
+      ><span id='contact-menu-label' class='inline-block relative z-10'
         >Contact</span
       >
       <div
-        class="absolute inset-0 bg-transparent
-         transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+        class='absolute inset-0 bg-transparent
+         transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out'
       >
       </div></button
     >
@@ -28,48 +28,45 @@ import Form from "@/components/Form.astro";
 
   <!-- CONTACT MENU OVERLAY -->
   <div
-    id="menu-overlay"
-    class="fixed inset-0 size-screen bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]"
+    id='menu-overlay'
+    class='fixed inset-0 size-screen bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]'
   >
     <div
-      id="menu-overlay-content"
-      class="fixed inset-0 size-screen bg-primary overflow-hidden flex -translate-y-1/2 will-change-transform"
+      id='menu-overlay-content'
+      class='fixed inset-0 size-screen bg-primary overflow-hidden flex -translate-y-1/2 will-change-transform'
     >
       <div
-        id="menu-media-wrapper"
-        class="flex-2 will-change-[opacity] hidden md:block opacity-0"
+        id='menu-media-wrapper'
+        class='flex-2 will-change-[opacity] hidden md:block opacity-0'
       >
         <img
           src={slides[0].image.src}
-          alt="Hero Image"
+          alt='Hero Image'
           width={1920}
           height={1080}
-          class="size-full object-cover opacity-25"
+          class='size-full object-cover opacity-25'
         />
       </div>
-      <div id="menu-content-wrapper" class="flex-3 flex relative">
+      <div id='menu-content-wrapper' class='flex-3 flex relative'>
         <div
-          id="menu-content-main"
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex w-full md:w-3/4 p-8 md:items-end gap-16 md:gap-8 flex-col md:flex-row items-start"
+          id='menu-content-main'
+          class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex w-full md:w-3/4 p-8 md:items-end gap-16 md:gap-8 flex-col md:flex-row items-start'
         >
           <Form />
         </div>
         <div
-          id="menu-content-footer"
-          class="my-0 mx-auto flex w-full md:w-3/4 p-8 items-end gap-8 text-muted-foreground"
+          id='menu-content-footer'
+          class='my-0 mx-auto flex w-full md:w-3/4 p-8 items-end gap-8 text-muted-foreground'
         >
           <!-- CONTACT INFO -->
-          <div class="menu-col flex flex-col gap-2 flex-3">
+          <div class='menu-col flex flex-col gap-2 flex-3 text-xs md:text-base'>
             <p>© {new Date().getFullYear()} NANO-9. All rights reserved.</p>
           </div>
-          <div class="menu-col flex flex-col gap-2 flex-2">
+          <div class='menu-col flex flex-col gap-2 flex-2'>
             <p>
-              <a href="mailto:ceo@nanostudio.pro" class="underline"
-                >ceo@nanostudio.pro</a
+              <a href='tel:+62647317214' class='underline text-xs md:text-base'
+                >+62 647 31 72 14</a
               >
-            </p>
-            <p>
-              <a href="tel:+62647317214" class="underline">+62 647 31 72 14</a>
             </p>
           </div>
         </div>
@@ -79,244 +76,244 @@ import Form from "@/components/Form.astro";
 </header>
 
 <script>
-  import gsap from "gsap";
-  import { CustomEase } from "gsap/CustomEase";
-  import { SplitText } from "gsap/SplitText";
-  import { slides } from "@/assets";
+  import gsap from 'gsap'
+  import { CustomEase } from 'gsap/CustomEase'
+  import { SplitText } from 'gsap/SplitText'
+  import { slides } from '@/assets'
 
   // ELEMENTS
-  const heroContainer = document.querySelector("#hero-container");
-  const menuToggle = document.querySelector("#menu-toggle");
-  const contactMenuLabel = document.querySelector("#contact-menu-label");
-  const menuOverlay = document.querySelector("#menu-overlay");
-  const menuMediaWrapper = document.querySelector("#menu-media-wrapper");
-  const menuOverlayContent = document.querySelector("#menu-overlay-content");
-  const textContainers = document.querySelectorAll(".menu-col");
-  const formItems = document.querySelectorAll(".form-item");
-  const footerNav = document.querySelector("#footer-nav");
+  const heroContainer = document.querySelector('#hero-container')
+  const menuToggle = document.querySelector('#menu-toggle')
+  const contactMenuLabel = document.querySelector('#contact-menu-label')
+  const menuOverlay = document.querySelector('#menu-overlay')
+  const menuMediaWrapper = document.querySelector('#menu-media-wrapper')
+  const menuOverlayContent = document.querySelector('#menu-overlay-content')
+  const textContainers = document.querySelectorAll('.menu-col')
+  const formItems = document.querySelectorAll('.form-item')
+  const footerNav = document.querySelector('#footer-nav')
 
   // COUNTER
-  document.addEventListener("slidechange", (e) => {
-    const ev = e as CustomEvent<{ index: number }>;
+  document.addEventListener('slidechange', (e) => {
+    const ev = e as CustomEvent<{ index: number }>
     menuMediaWrapper
-      ?.querySelector("img")
-      ?.setAttribute("src", slides[ev.detail.index - 1].image.src);
-    console.log("Current slide:", ev.detail.index);
-  });
+      ?.querySelector('img')
+      ?.setAttribute('src', slides[ev.detail.index - 1].image.src)
+    console.log('Current slide:', ev.detail.index)
+  })
 
-  document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(CustomEase, SplitText);
-    CustomEase.create("hop", ".8, 0, .3, 1");
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(CustomEase, SplitText)
+    CustomEase.create('hop', '.8, 0, .3, 1')
 
     // VARIABLES
-    let textSplits = [] as SplitText[][];
-    let isMenuOpen = false;
-    let isAnimating = false;
+    let textSplits = [] as SplitText[][]
+    let isMenuOpen = false
+    let isAnimating = false
 
     // SPLIT TEXT
     textContainers.forEach((container) => {
-      const textElements = container.querySelectorAll("p, .menu-link");
-      let containerSplits = [] as SplitText[];
+      const textElements = container.querySelectorAll('p, .menu-link')
+      let containerSplits = [] as SplitText[]
 
       textElements.forEach((element) => {
         const split = SplitText.create(element, {
-          type: "lines",
-          mask: "lines",
-          linesClass: "line",
-        });
-        containerSplits.push(split);
+          type: 'lines',
+          mask: 'lines',
+          linesClass: 'line'
+        })
+        containerSplits.push(split)
 
         gsap.set(split.lines, {
-          y: "-110%",
-        });
-      });
+          y: '-110%'
+        })
+      })
 
-      textSplits.push(containerSplits);
-    });
+      textSplits.push(containerSplits)
+    })
 
     // EVENT
-    menuToggle?.addEventListener("click", () => {
-      if (isAnimating) return;
+    menuToggle?.addEventListener('click', () => {
+      if (isAnimating) return
 
       if (!isMenuOpen) {
         // OPEN ANIMATION
-        isAnimating = true;
+        isAnimating = true
 
         const tl = gsap.timeline({
           defaults: {
-            ease: "hop",
-          },
-        });
+            ease: 'hop'
+          }
+        })
 
         tl.to(footerNav, {
           opacity: 0,
           y: 50,
-          duration: 0.5,
+          duration: 0.5
         })
           .to(
             contactMenuLabel,
             {
-              y: "-110%",
+              y: '-110%',
               duration: 0.25,
               onComplete: () => {
-                if (contactMenuLabel) contactMenuLabel.innerHTML = "Cerrar";
+                if (contactMenuLabel) contactMenuLabel.innerHTML = 'Cerrar'
                 gsap.to(contactMenuLabel, {
-                  y: "0%",
+                  y: '0%',
                   duration: 0.5,
-                  ease: "hop",
-                });
-              },
+                  ease: 'hop'
+                })
+              }
             },
-            "<"
+            '<'
           )
           .to(
             heroContainer,
             {
-              y: "100svh",
-              duration: 1,
+              y: '100svh',
+              duration: 1
             },
-            "<"
+            '<'
           )
           .to(
             menuOverlay,
             {
-              clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
-              duration: 1,
+              clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)',
+              duration: 1
             },
-            "<"
+            '<'
           )
           .to(
             menuOverlayContent,
             {
               yPercent: 0,
-              duration: 1,
+              duration: 1
             },
-            "<"
+            '<'
           )
           .to(
             menuMediaWrapper,
             {
               opacity: 1,
               duration: 0.75,
-              ease: "power2.out",
-              delay: 0.5,
+              ease: 'power2.out',
+              delay: 0.5
             },
-            "<"
+            '<'
           )
           .from(
             formItems,
             {
               opacity: 0,
               duration: 0.5,
-              stagger: 0.1,
+              stagger: 0.1
             },
             1
-          );
+          )
 
         textSplits.forEach((containerSplits) => {
           const copyLines = containerSplits.flatMap(
             (splitText) => splitText.lines
-          );
+          )
 
           tl.to(
             copyLines,
             {
-              y: "0%",
+              y: '0%',
               duration: 2,
-              stagger: -0.075,
+              stagger: -0.075
             },
             -0.15
-          );
-        });
+          )
+        })
 
         tl.call(() => {
-          isAnimating = false;
-        });
+          isAnimating = false
+        })
 
-        isMenuOpen = true;
+        isMenuOpen = true
       } else {
         // CLOSE ANIMATION
-        isAnimating = true;
+        isAnimating = true
 
         const tl = gsap.timeline({
           defaults: {
-            ease: "hop",
-          },
-        });
+            ease: 'hop'
+          }
+        })
 
         tl.to(contactMenuLabel, {
-          y: "-110%",
+          y: '-110%',
           duration: 0.25,
           onComplete: () => {
-            if (contactMenuLabel) contactMenuLabel.innerHTML = "Contacto";
+            if (contactMenuLabel) contactMenuLabel.innerHTML = 'Contacto'
             gsap.to(contactMenuLabel, {
-              y: "0%",
+              y: '0%',
               duration: 0.5,
-              ease: "hop",
-            });
-          },
+              ease: 'hop'
+            })
+          }
         })
           .to(
             heroContainer,
             {
-              y: "0svh",
-              duration: 1,
+              y: '0svh',
+              duration: 1
             },
-            "<"
+            '<'
           )
           .to(
             menuOverlay,
             {
-              clipPath: "polygon(0 0%, 100% 0%, 100% 0%, 0% 0%)",
-              duration: 1,
+              clipPath: 'polygon(0 0%, 100% 0%, 100% 0%, 0% 0%)',
+              duration: 1
             },
-            "<"
+            '<'
           )
           .to(
             menuOverlayContent,
             {
               yPercent: -50,
-              duration: 1,
+              duration: 1
             },
-            "<"
+            '<'
           )
           .to(
             textContainers,
             {
               opacity: 0.25,
-              duration: 0.75,
+              duration: 0.75
             },
-            "<"
+            '<'
           )
           .to(footerNav, {
             opacity: 1,
             y: 0,
-            duration: 0.5,
-          });
+            duration: 0.5
+          })
 
         tl.call(() => {
           textSplits.forEach((containerSplits) => {
             const lines = containerSplits.flatMap(
               (splitText) => splitText.lines
-            );
+            )
 
             gsap.set(lines, {
-              y: "-110%",
-            });
-          });
+              y: '-110%'
+            })
+          })
 
           gsap.set(textContainers, {
-            opacity: 1,
-          });
+            opacity: 1
+          })
           gsap.set(menuMediaWrapper, {
-            opacity: 0,
-          });
+            opacity: 0
+          })
 
-          isAnimating = false;
-        });
+          isAnimating = false
+        })
 
-        isMenuOpen = false;
+        isMenuOpen = false
       }
-    });
-  });
+    })
+  })
 </script>
