@@ -36,7 +36,7 @@
   <!-- ABOUT OVERLAY -->
   <div
     id='footer-overlay'
-    class='fixed inset-x-0 bottom-0 h-[80svh] bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0_100%,100%_100%,100%_100%,0_100%)]'
+    class='fixed inset-x-0 bottom-0 md:h-[40svh] h-[80svh] bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0_100%,100%_100%,100%_100%,0_100%)]'
   >
     <div
       id='footer-overlay-content'
@@ -90,6 +90,9 @@
   const overlayContent = document.querySelector('#footer-overlay-content')
   const textContainers = document.querySelectorAll('.footer-col')
   const headerNav = document.querySelector('#header-nav')
+
+  // RESPONSIVENESS
+  const isMobile = window.innerWidth <= 768
 
   document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(CustomEase, SplitText)
@@ -146,7 +149,7 @@
           .to(
             heroContainer,
             {
-              y: '-80svh',
+              y: isMobile ? '-80svh' : '-40svh',
               duration: 0.8
             },
             '<'
