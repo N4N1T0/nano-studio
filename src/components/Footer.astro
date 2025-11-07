@@ -2,13 +2,13 @@
   class='fixed w-screen h-fit overflow-hidden z-20 inset-0 text-primary-foreground'
 >
   <div
-    class='fixed bottom-0 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0'
+    class='fixed -bottom-4 left-0 w-screen p-8 flex justify-between items-center z-20 opacity-0'
     id='footer-nav'
   >
     <!-- ABOUT BUTTON -->
     <button
       id='footer-about-toggle'
-      class='group relative w-full md:w-auto px-6 py-2 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground z-10'
+      class='group relative w-auto px-3 md:px-6 py-1 md:py-2 text-primary bg-primary-foreground font-medium uppercase tracking-wide overflow-hidden transition-all duration-300 ease-out hover:bg-muted-foreground hover:text-primary-foreground z-10'
     >
       <span class='inline-block relative z-10' id='footer-about-menu-label'
         >About</span
@@ -30,22 +30,22 @@
       </div>
     </div>
 
-    <p>Scroll Down or Up</p>
+    <p class='text-xs md:text-base'>Scroll Down or Up</p>
   </div>
 
   <!-- ABOUT OVERLAY -->
   <div
     id='footer-overlay'
-    class='fixed inset-x-0 bottom-0 h-[40svh] bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0_100%,100%_100%,100%_100%,0_100%)]'
+    class='fixed inset-x-0 bottom-0 h-[80svh] bg-primary overflow-hidden will-change-[clip-path] [clip-path:polygon(0_100%,100%_100%,100%_100%,0_100%)]'
   >
     <div
       id='footer-overlay-content'
       class='absolute inset-x-0 bottom-0 h-full bg-primary overflow-hidden flex items-end will-change-transform'
     >
       <div
-        class='size-full md:w-3/4 mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-primary-foreground'
+        class='size-full md:w-3/4 mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-8 text-primary-foreground'
       >
-        <div class='footer-col flex flex-col gap-2 col-span-1'>
+        <div class='footer-col flex flex-col gap-1 md:gap-2 col-span-1'>
           <p class='text-lg font-semibold'>PORTFOLIO</p>
           <p class='text-muted-foreground underline'>
             <a href='https://www.adrian-alvarez.dev/en/' target='_blank'
@@ -53,8 +53,8 @@
             >
           </p>
         </div>
-        <div class='footer-col flex flex-col gap-2 col-span-2'>
-          <p class='font-medium'>
+        <div class='footer-col flex flex-col gap-1 md:gap-2 col-span-2'>
+          <p class='font-medium text-sm md:text-base'>
             I design and build digital experiences where elegance meets
             performance. As a Front-End Developer, I translate the essence of
             luxury brands into fluid, high-converting interfaces — blending
@@ -63,7 +63,7 @@
             navigate.
           </p>
 
-          <p class='font-medium'>
+          <p class='font-medium text-sm md:text-base'>
             Each project reflects a balance between design precision and
             technical mastery — built with modern frameworks, optimized for
             speed, and tailored to evoke the sophistication your brand deserves.
@@ -146,7 +146,7 @@
           .to(
             heroContainer,
             {
-              y: '-40svh',
+              y: '-80svh',
               duration: 0.8
             },
             '<'
