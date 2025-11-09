@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import 'tailwindcss';
 
 @theme {
   /* FONT */
-  --font-sans: "DM Sans", sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
 
   /* COLOR */
   --color-primary: oklch(27.81% 0.0296 256.85);
@@ -57,21 +57,21 @@
 }
 
 .slide-main-img-wrapper img {
-  @apply size-full object-cover absolute z-0 will-change-transform;
+  @apply absolute z-0 size-full object-cover will-change-transform;
 }
 
 .slide-main-img-wrapper .overlay {
-  @apply size-full object-cover absolute blur-2xl brightness-75 bg-primary z-20 opacity-20;
+  @apply bg-primary absolute z-20 size-full object-cover opacity-20 blur-2xl brightness-75;
 }
 
 .card {
-  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] md:w-[30%] h-[70%] flex justify-center items-center bg-primary-foreground p-3 flex-col text-primary z-50;
+  @apply bg-primary-foreground text-primary absolute top-1/2 left-1/2 z-50 flex h-[65%] w-[75%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center p-3 md:w-[30%];
 }
 
 .card .card-bg-img {
-  @apply overflow-hidden flex-1 relative size-full;
+  @apply relative size-full flex-1 overflow-hidden;
 }
 
 .card .card-bg-img img {
-  @apply size-full object-cover will-change-transform absolute inset-0;
+  @apply absolute inset-0 size-full object-cover will-change-transform;
 }
