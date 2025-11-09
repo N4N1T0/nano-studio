@@ -34,7 +34,7 @@ import { slides } from '@/assets'
         <p>{slides[0].title}</p>
       </div>
       <div class='w-full card-description overflow-hidden text-xs md:text-sm'>
-        <p>
+        <p class='line-clamp-4'>
           {slides[0].description}
         </p>
       </div>
@@ -201,11 +201,25 @@ import { slides } from '@/assets'
         )
     }
 
+    let touchStartY = 0
     const handleScroll = (direction: 'up' | 'down') => {
       const now = Date.now()
       if (now - lastScrollTime < 1000) return
       animateSlide(direction)
     }
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY
+    })
+
+    document.addEventListener('touchmove', (e) => {
+      const touchEndY = e.touches[0].clientY
+      const diff = touchStartY - touchEndY
+      if (Math.abs(diff) > 30) {
+        handleScroll(diff > 0 ? 'down' : 'up')
+        touchStartY = touchEndY
+      }
+    })
 
     document.addEventListener('wheel', (e) => {
       handleScroll(e.deltaY > 0 ? 'down' : 'up')
