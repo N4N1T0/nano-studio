@@ -57,8 +57,12 @@
     </form>
 
     <!-- STATUS -->
-    <div id='form-status' class='hidden text-center' aria-live='polite'>
-      <p class='text-primary-foreground'></p>
+    <div
+      id='form-status'
+      class='hidden p-3 md:p-6 bg-primary-foreground text-center mt-4 md:mt-8'
+      aria-live='polite'
+    >
+      <p class='text-primary font-medium'></p>
     </div>
 
     <!-- SUCCESS -->
@@ -76,6 +80,7 @@
 <script>
   import { actions } from 'astro:actions'
   import gsap from 'gsap'
+  import { isJibberish, getJibberishMessage } from '@/lib/utils'
 
   // ELEMENTS
   const form = document.querySelector('#contact-form') as HTMLFormElement
@@ -110,8 +115,28 @@
     if (originalBtnText)
       submitButton.querySelector('span')!.textContent = 'Sending...'
 
-    // SUBMIT
+    // FORM DATA
     const formData = new FormData(form)
+
+    // CLIENT VALIDATION: gibberish checks
+    const nameVal = formData.get('name')?.toString().trim() ?? ''
+    const messageVal = formData.get('message')?.toString().trim() ?? ''
+    const nameCheck = isJibberish(nameVal)
+    const messageCheck = isJibberish(messageVal)
+
+    if (nameCheck.jibberish || messageCheck.jibberish) {
+      const msg = nameCheck.jibberish
+        ? getJibberishMessage('name', nameCheck.reason)
+        : getJibberishMessage('message', messageCheck.reason)
+      status.textContent = msg
+      status?.parentElement?.classList.remove('hidden')
+      submitButton.disabled = false
+      if (originalBtnText)
+        submitButton.querySelector('span')!.textContent = originalBtnText
+      return
+    }
+
+    // SUBMIT
     const { error, data } = await actions.contact(formData)
 
     // ERROR
